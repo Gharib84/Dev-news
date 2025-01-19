@@ -1,0 +1,12 @@
+@media(max-width:800px){
+   .container
+   {
+    overflow-x: scroll;
+    scroll-behavior: smooth;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-direction: row;
+    width: 100vw;
+   }
+}

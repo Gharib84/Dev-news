@@ -1,0 +1,22 @@
+<section class="hero-section flex flex-row w-full h-60 justify-center items-center">
+  <div class="hero-content">
+    <h2 class="gradient-text">Programming Channels</h2>
+  </div>
+</section>
+<app-chips></app-chips>
+<main class="container grid grid-cols-12 w-full mx-auto">
+  <div class="card container bg-base-100 w-full shadow-xl h-full mx-auto col-start-2 col-end-12 lg:col-start-1 lg:col-end-6 xl:col-start-1 xl:col-end-6" *ngFor="let article of data">
+    <figure>
+      <img
+        src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.webp"
+        alt="Shoes" />
+    </figure>
+    <div class="card-body">
+      <h2 class="card-title"></h2>
+      <p>{{article.title}}</p>
+      <div class="card-actions justify-end">
+        <button class="btn btn-primary">Buy Now</button>
+      </div>
+    </div>
+  </div>
+</main>
