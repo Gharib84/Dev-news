@@ -6,10 +6,10 @@
 <app-chips></app-chips>
 <main class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-4">
   <div class="card bg-base-100 shadow-xl h-full mx-auto" *ngFor="let article of data">
-    <figure>
+    <figure class="relative w-full overflow-hidden" style="height: 300px;">
       <picture>
-          <img src="{{article.social_image}}" alt="{{article.description}}"  class="w-full h-auto object-cover my-0">
-        </picture>
+        <img src="{{article.social_image}}" alt="{{article.description}}" class="object-cover">
+      </picture>
     </figure>
     <div class="card-body">
       <h2 class="card-title"></h2>
