@@ -1,19 +1,17 @@
 import { Component, OnInit, ChangeDetectionStrategy, inject } from '@angular/core';
 import { RouterOutlet,RouterLink } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ChipsComponent } from './Share/Components/chips/chips.component';
+import { ChipsComponent } from '../chips/chips.component';
 import { NgFor } from '@angular/common';
-import { DevService } from './service/dev.service';
-
+import { DevService } from '../../../service/dev.service';
 
 @Component({
-  selector: 'app-root',
-  imports: [CommonModule,RouterOutlet],
-  templateUrl: './app.component.html',
-  styleUrl: './app.component.css',
+  selector: 'app-item-layouts',
+  imports: [CommonModule, ChipsComponent,NgFor,RouterLink],
+  templateUrl: './item-layouts.component.html',
+  styleUrl: './item-layouts.component.css'
 })
-export class AppComponent implements OnInit {
-  title = 'youtube';
+export class ItemLayoutsComponent implements OnInit {
   data: any[] = [];
   devService = inject(DevService);
   constructor() { }
@@ -34,5 +32,4 @@ export class AppComponent implements OnInit {
       }
     });
   }
-
 }

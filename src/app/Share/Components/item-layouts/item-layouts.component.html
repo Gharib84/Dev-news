@@ -1,0 +1,23 @@
+<section class="hero-section flex flex-row w-full h-60 justify-center items-center">
+    <div class="hero-content">
+      <h2 class="gradient-text">Programming Channels</h2>
+    </div>
+  </section>
+  <app-chips></app-chips>
+  <main class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2">
+    <div class="card bg-base-100 shadow-xl mx-auto p-2 lg:p-10" *ngFor="let article of data">
+      <figure class="relative w-full overflow-hidden" style="height: 300px;">
+        <picture class="w-full">
+          <img src="{{article.social_image}}" alt="{{article.description}}" class="">
+        </picture>
+      </figure>
+      <div class="card-body">
+        <h2 class="card-title"></h2>
+        <p>{{article.description}}</p>
+        <div class="card-actions justify-end">
+          <a [routerLink]="['/item', article.id]" class="text-bold text-yellow-500 read-more">Read more</a>      
+        </div>
+      </div>
+    </div>
+  </main>
+  <!-- Add router-outlet here -->
