@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-item',
@@ -7,5 +8,5 @@ import { Component } from '@angular/core';
   styleUrl: './item.component.css'
 })
 export class ItemComponent {
-
+  private rouerService = inject(ActivatedRoute);
 }
