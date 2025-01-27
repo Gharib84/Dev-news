@@ -6,10 +6,12 @@ export const routes: Routes = [
     {
         path:'',
         component: ItemLayoutsComponent,
+        title: 'Home Page'
     },
     {
         path: 'item/:id',
-        loadComponent: ()=> import('./Share/Components/item/item.component').then((run)=> run.ItemComponent)
+        loadComponent: ()=> import('./Share/Components/item/item.component').then((run)=> run.ItemComponent),
+        title: 'Item details'
     },
     {
         path: '**',
