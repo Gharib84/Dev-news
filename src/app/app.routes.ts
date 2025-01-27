@@ -10,5 +10,9 @@ export const routes: Routes = [
     {
         path: 'item/:id',
         loadComponent: ()=> import('./Share/Components/item/item.component').then((run)=> run.ItemComponent)
+    },
+    {
+        path: '**',
+        redirectTo: ''
     }
 ];
