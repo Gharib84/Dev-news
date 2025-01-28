@@ -1,12 +1,13 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DevService } from '../../../service/dev.service';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-item',
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './item.component.html',
-  styleUrl: './item.component.css'
+  styleUrl: './item.component.css',
 })
 export class ItemComponent implements OnInit {
   private routerService = inject(ActivatedRoute);
