@@ -11,8 +11,9 @@ import { DevService } from '../../../service/dev.service';
 export class ItemComponent implements OnInit {
   private routerService = inject(ActivatedRoute);
   private devService = inject(DevService);
-  itemId: string | undefined;
+  itemId: number | undefined;
   data: any[] = [];
+  item: any[] = [];
 
   constructor() { }
 
@@ -21,15 +22,18 @@ export class ItemComponent implements OnInit {
       let id = params.get('id');
 
       if (id) {
-        this.itemId = id
+        this.itemId = parseInt(id)
       }
-    })
+    });
+
+    this.getArticles()
   }
 
   getArticles(): void {
     this.devService.articles().subscribe({
       next: (articles) => {
         this.data = articles;
+        this.item = this.data.find((item) => item.id === this.itemId);
       },
       error: (err) => console.log(err)
     })

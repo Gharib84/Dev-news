@@ -24,8 +24,7 @@ export class ItemLayoutsComponent implements OnInit {
   articles(): void {
     this.devService.articles().subscribe({
       next: (value) => {
-        this.data = value; // Assign the returned value to data
-        console.log(this.data); // Log the data here
+        this.data = value;
       },
       error: (err) => {
         console.error('Error fetching articles:', err); // Handle errors if needed
