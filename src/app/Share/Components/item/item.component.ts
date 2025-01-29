@@ -3,10 +3,11 @@ import { ActivatedRoute } from '@angular/router';
 import { DevService } from '../../../service/dev.service';
 import { CommonModule } from '@angular/common';
 import { Item } from '../../../core/interfaces/item';
+import { NgIf } from '@angular/common';
 
 @Component({
   selector: 'app-item',
-  imports: [CommonModule],
+  imports: [CommonModule,NgIf],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css',
 })
@@ -16,6 +17,7 @@ export class ItemComponent implements OnInit {
   itemId: number | undefined;
   data: Item[] = [];
   item: Item | undefined;
+  imageLoad:boolean = false;
 
   constructor() { }
 
@@ -46,6 +48,9 @@ export class ItemComponent implements OnInit {
     });
   }
   
-
+  oneImageLoad():void
+  {
+    this.imageLoad = true;
+  }
 
 }
