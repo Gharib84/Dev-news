@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChipsComponent } from './Share/Components/chips/chips.component';
 import { NgFor } from '@angular/common';
 import { DevService } from './service/dev.service';
+import { Item } from './core/interfaces/item';
 
 
 @Component({
@@ -14,7 +15,7 @@ import { DevService } from './service/dev.service';
 })
 export class AppComponent implements OnInit {
   title = 'youtube';
-  data: any[] = [];
+  data: Item[] = [];
   devService = inject(DevService);
   constructor() { }
 
@@ -26,7 +27,9 @@ export class AppComponent implements OnInit {
   articles(): void {
     this.devService.articles().subscribe({
       next: (value) => {
-        this.data = value;
+        if(value){
+          this.data = value;
+        }
       },
       error: (err) => {
         console.error('Error fetching articles:', err); // Handle errors if needed

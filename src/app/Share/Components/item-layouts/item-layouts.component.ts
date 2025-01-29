@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChipsComponent } from '../chips/chips.component';
 import { NgFor } from '@angular/common';
 import { DevService } from '../../../service/dev.service';
+import { Item } from '../../../core/interfaces/item';
 
 @Component({
   selector: 'app-item-layouts',
@@ -12,7 +13,7 @@ import { DevService } from '../../../service/dev.service';
   styleUrl: './item-layouts.component.css'
 })
 export class ItemLayoutsComponent implements OnInit {
-  data: any[] = [];
+  data: Item[] | undefined;
   devService = inject(DevService);
   constructor() { }
 
@@ -24,7 +25,7 @@ export class ItemLayoutsComponent implements OnInit {
   articles(): void {
     this.devService.articles().subscribe({
       next: (value) => {
-        this.data = value;
+        this.data = value
       },
       error: (err) => {
         console.error('Error fetching articles:', err); // Handle errors if needed
