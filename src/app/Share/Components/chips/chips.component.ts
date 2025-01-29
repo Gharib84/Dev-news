@@ -12,12 +12,12 @@ import { faAtom } from '@fortawesome/free-solid-svg-icons';
 export class ChipsComponent {
   faAtom = faAtom;
   programmingLanguages:string[] = [
-    "Angular",
-    "Python",
-    "Typescript",
-    "Node",
-    "Symfony",
-    "React",
-    "Docker",
+    "deepseek",
+    "ML",
+    "Programming",
+    "AI",
+    "Webdev",
+    "Frontend",
+    "Ruby",
   ]
 }

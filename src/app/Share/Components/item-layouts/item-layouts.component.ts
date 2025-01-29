@@ -25,7 +25,10 @@ export class ItemLayoutsComponent implements OnInit {
   articles(): void {
     this.devService.articles().subscribe({
       next: (value) => {
-        this.data = value
+        if (value && Array.isArray(value)) {
+          this.data = value.filter((item)=> item.tags.includes("deepseek"));
+          console.log(this.data)
+        }
       },
       error: (err) => {
         console.error('Error fetching articles:', err); // Handle errors if needed
