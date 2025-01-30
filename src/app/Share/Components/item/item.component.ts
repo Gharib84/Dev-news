@@ -1,9 +1,10 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit,OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DevService } from '../../../service/dev.service';
 import { CommonModule } from '@angular/common';
 import { Item } from '../../../core/interfaces/item';
 import { NgIf } from '@angular/common';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-item',
@@ -11,13 +12,14 @@ import { NgIf } from '@angular/common';
   templateUrl: './item.component.html',
   styleUrl: './item.component.css',
 })
-export class ItemComponent implements OnInit {
+export class ItemComponent implements OnInit, OnDestroy {
   private routerService = inject(ActivatedRoute);
   private devService = inject(DevService);
   itemId: number | undefined;
   data: Item[] = [];
   item: Item | undefined;
   imageLoad:boolean = false;
+  private subscription!:Subscription;
 
   constructor() { }
 
@@ -34,7 +36,7 @@ export class ItemComponent implements OnInit {
   }
 
   getArticles(): void {
-    this.devService.articles().subscribe({
+    this.subscription = this.devService.articles().subscribe({
       next: (articles) => {
         if(articles){
           this.data = articles; 
@@ -51,6 +53,12 @@ export class ItemComponent implements OnInit {
   oneImageLoad():void
   {
     this.imageLoad = true;
+  }
+
+  ngOnDestroy(): void {
+    if(this.subscription){
+      this.subscription.unsubscribe();
+    }
   }
 
 }
