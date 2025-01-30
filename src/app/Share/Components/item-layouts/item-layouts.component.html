@@ -3,7 +3,7 @@
       <h2 class="gradient-text">Programming Channels</h2>
     </div>
   </section>
-  <app-chips></app-chips>
+  <app-chips (tag)="searchByTagName($event)"></app-chips>
   <main class="container mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-2 gap-2">
     <div class="card bg-base-100 shadow-xl mx-auto p-2 lg:p-10" *ngFor="let article of data">
       <figure class="relative w-full overflow-hidden" style="height: 300px;">

@@ -44,4 +44,9 @@ export class ItemLayoutsComponent implements OnInit,OnDestroy {
       this.subscription.unsubscribe();
     }
   }
+
+  searchByTagName(tage:string):void
+  {
+    console.log(tage);
+  }
 }
