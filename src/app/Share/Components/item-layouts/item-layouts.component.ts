@@ -45,8 +45,8 @@ export class ItemLayoutsComponent implements OnInit,OnDestroy {
     }
   }
 
-  searchByTagName(tage:string):void
+  searchByTagName(tage:string):string
   {
-    console.log(tage);
+    return tage;
   }
 }
