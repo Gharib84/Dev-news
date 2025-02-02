@@ -21,6 +21,7 @@ export class ItemLayoutsComponent implements OnInit,OnDestroy {
 
   ngOnInit(): void {
     this.articles();
+    this.searchByTagName()
 
   }
 
@@ -29,7 +30,7 @@ export class ItemLayoutsComponent implements OnInit,OnDestroy {
       next: (value) => {
 
         if (value && Array.isArray(value)) {
-          this.data = value.filter((item)=> item.tags.includes("ai"));
+          this.data = value.filter((item)=> item.tags.includes(this.searchByTagName()));
           console.log(this.data)
         }
       },
@@ -45,8 +46,21 @@ export class ItemLayoutsComponent implements OnInit,OnDestroy {
     }
   }
 
-  searchByTagName(tage:string):string
+  searchByTagName(tage?:string):string
   {
-    return tage;
+    if (tage && typeof tage === 'string') {
+      this.subscription = this.devService.articles().subscribe({
+        next: (value) => {
+  
+          if (value && Array.isArray(value)) {
+            this.data = value.filter((item)=> item.tags.includes(tage));
+          }
+        },
+        error: (err) => {
+          console.error('Error fetching articles:', err); // Handle errors if needed
+        }
+      });
+    }
+    return "";
   }
 }

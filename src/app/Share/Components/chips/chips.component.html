@@ -1,6 +1,6 @@
 <div class="container relative bottom-10 w-full mx-auto">
    <div class="chips flex flex-row justify-center items-center gap-5 py-1 px-1">
-      <button  class="chip-label bg-purple-700 rounded-md py-2 px-4 font-bold text-white" *ngFor="let language of programmingLanguages" (click)="getNameTage(language)">
+      <button  class="chip-label capitalize bg-purple-700 rounded-md py-2 px-4 font-bold text-white" *ngFor="let language of elements" (click)="getNameTage(language)">
         {{ language }}
       </button>
    </div>
