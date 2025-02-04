@@ -5,10 +5,11 @@ import { CommonModule } from '@angular/common';
 import { Item } from '../../../core/interfaces/item';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
+import { CommentComponent } from "../comment/comment.component";
 
 @Component({
   selector: 'app-item',
-  imports: [CommonModule,NgIf],
+  imports: [CommonModule, NgIf, CommentComponent],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css',
 })
