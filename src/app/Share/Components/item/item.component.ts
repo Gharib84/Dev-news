@@ -6,10 +6,10 @@ import { Item } from '../../../core/interfaces/item';
 import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { CommentComponent } from "../comment/comment.component";
-
+import { CardComponent } from '../card/card.component';
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, NgIf, CommentComponent],
+  imports: [CommonModule, NgIf, CommentComponent,CardComponent],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css',
 })
