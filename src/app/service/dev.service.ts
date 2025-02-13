@@ -13,4 +13,5 @@ export class DevService {
   articles(): Observable<Item[] | undefined> {
     return this.http.get<Item[]>(`${Apikey.API_URL}`);
   }
+  
 }

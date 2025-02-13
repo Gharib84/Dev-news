@@ -12,9 +12,6 @@ export class FirsebaseService {
 
   constructor() { }
 
-  //create a new comment
-
-  // Create a new comment
   addComment(): Observable<any> {
     const addCommentPromise = addDoc(collection(this.fireStore, this.collectioName), {
       name: "Hard Rock",
@@ -22,5 +19,19 @@ export class FirsebaseService {
     });
 
     return from(addCommentPromise);
+  }
+
+  
+  getComments(): Observable<Comment[]> {
+    const comments = getDocs(query(collection(this.fireStore, this.collectioName)));
+    return from(comments).pipe(
+      map((querySnapshot) => {
+        const comments: Comment[] = [];
+        querySnapshot.forEach((doc) => {
+          comments.push(doc.data() as Comment);
+        });
+        return comments;
+      })
+    );
   }
 }
