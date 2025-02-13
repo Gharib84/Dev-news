@@ -12,4 +12,3 @@ import { initializeApp } from 'firebase/app';
 // Bootstrap Angular application
 bootstrapApplication(AppComponent, appConfig)
   .catch((err) => console.error(err));
-

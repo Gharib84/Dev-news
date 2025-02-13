@@ -7,6 +7,7 @@ import { NgIf } from '@angular/common';
 import { Subscription } from 'rxjs';
 import { CommentComponent } from "../comment/comment.component";
 import { CardComponent } from '../card/card.component';
+import { FirsebaseService } from '../../../service/firsebase.service';
 @Component({
   selector: 'app-item',
   imports: [CommonModule, NgIf, CommentComponent,CardComponent],
@@ -21,7 +22,7 @@ export class ItemComponent implements OnInit, OnDestroy {
   item: Item | undefined;
   imageLoad:boolean = false;
   private subscription!:Subscription;
-
+  private fireService = inject(FirsebaseService);
   constructor() { }
 
   ngOnInit(): void {
@@ -34,6 +35,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     });
 
     this.getArticles()
+    this.addComment()
   }
 
   getArticles(): void {
@@ -54,6 +56,15 @@ export class ItemComponent implements OnInit, OnDestroy {
   oneImageLoad():void
   {
     this.imageLoad = true;
+  }
+
+  addComment(): void {
+    this.subscription = this.fireService.addComment().subscribe({
+      next: (res) => {
+        console.log(res);
+      },
+      error: (err) => console.error('Error adding comment:', err),
+    });
   }
 
   ngOnDestroy(): void {
