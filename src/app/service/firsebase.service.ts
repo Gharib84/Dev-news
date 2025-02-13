@@ -17,8 +17,8 @@ export class FirsebaseService {
   // Create a new comment
   addComment(): Observable<any> {
     const addCommentPromise = addDoc(collection(this.fireStore, this.collectioName), {
-      name: "Los Angeles",
-      description: "LA is a city"
+      name: "Hard Rock",
+      description: "Metallica",
     });
 
     return from(addCommentPromise);

@@ -35,7 +35,7 @@ export class ItemComponent implements OnInit, OnDestroy {
     });
 
     this.getArticles()
-    this.addComment()
+    //this.addComment()
   }
 
   getArticles(): void {
