@@ -1,4 +1,7 @@
 <div class="card-container h-auto">
+  @for ( comment of comments ; track comment.id ) {
+
+
   <div
     class="container card bg-[#141517] h-auto w-full mx-auto rounded-md shadow-md flex flex-col md:flex-row justify-between p-14 lg:p-10 md:p-12 items-center  md:h-52 mt-10">
     <div class="avatar  w-24 h-24 rounded-full mb-4 md:mb-0">
@@ -8,10 +11,9 @@
       </div>
     </div>
     <div class="content flex flex-col justify-center items-center lg:items-start md:gx-10  w-full h-full ml-0 md:ml-5">
-      <h6 class="text-pink-500 text-lg lg:text-lg font-bold">Mahmoud Gharib</h6>
-      <p class="text-sm md:text-base text-center lg:text-left">Lorem ipsum dolor sit amet consectetur adipisicing elit. Amet deleniti animi
-        expedita nesciunt?
-        Ut nesciunt enim sequi fuga repudiandae ratione?</p>
+      <h6 class="text-pink-500 text-lg lg:text-lg font-bold">{{comment.name}}</h6>
+      <p class="text-sm md:text-base text-center lg:text-left">{{comment.description }}</p>
     </div>
   </div>
+  }
 </div>

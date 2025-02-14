@@ -13,6 +13,7 @@ export class CardComponent  implements OnInit, OnDestroy {
   comments: Comment[] = [];
   private subscription: Subscription = new Subscription();
   private firsebaseService = inject(FirsebaseService);
+  blueEffect: boolean = false;
 
   constructor() { }
   
@@ -21,6 +22,7 @@ export class CardComponent  implements OnInit, OnDestroy {
       this.firsebaseService.getComments().subscribe({
         next: (comments) => {
           this.comments = comments;
+          console.log(this.comments);
         },
         error: (error) => {
           console.error(error);
