@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, switchMap, from } from 'rxjs';
-import { Firestore, addDoc, collection, getDocs, query } from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, getDocs, query, deleteDoc, doc} from '@angular/fire/firestore';
 import { Comment } from '../core/interfaces/comment';
 @Injectable({
   providedIn: 'root'
@@ -33,5 +33,11 @@ export class FirsebaseService {
         return comments;
       })
     );
+  }
+
+  deleteComment(id: string): Observable<void> {
+    const deleteCommentPromise = deleteDoc(doc(this.fireStore, this.collectioName, id));
+
+    return from(deleteCommentPromise);
   }
 }
