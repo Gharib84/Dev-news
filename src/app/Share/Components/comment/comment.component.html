@@ -3,7 +3,7 @@
         <h3 class="text-pink-500 text-2xl lg:text-4xl font-bold">Comments</h3>
     </div>
     <div class="avatar rounded-full w-12 h-12 hidden lg:block">
-        <img src="https://i.pravatar.cc/150?img=68" alt="avatar" class="rounded-full w-12 h-12">
+        <img [src]="userAvatar" alt="avatar" class="rounded-full w-12 h-12">
     </div>
 </div>
 <div class="card bg-base-100 shadow-xl w-3/4 mx-auto lg:mx-0 lg:w-full p-0 lg:py-5 mt-5">
@@ -12,11 +12,9 @@
         <textarea formControlName="comment" class="textarea textarea-warning w-full" placeholder="Write Comment here" cols="100" rows="10"></textarea>
     @if (!signedIn) {
         <button class="btn btn-outline btn-secondary p-2 mt-5">share</button>
-    }@else {
-        <!--generate button for google sign in  -->
-
-        <button class="btn block btn-warning p-2 mt-5">Sign in</button>
-        
-    }
+    }    
     </form> 
+    @if (signedIn) {
+        <button class="btn block btn-warning p-2 mt-5" (click)="loginWithGoogle()">Sign in</button>
+    }
 </div>

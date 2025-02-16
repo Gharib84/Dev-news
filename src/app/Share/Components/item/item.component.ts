@@ -10,7 +10,7 @@ import { CardComponent } from '../card/card.component';
 import { FirsebaseService } from '../../../service/firsebase.service';
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, NgIf, CommentComponent, CardComponent],
+  imports: [CommonModule, NgIf, CommentComponent],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css',
 })
