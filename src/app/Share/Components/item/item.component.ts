@@ -1,4 +1,4 @@
-import { Component, inject, OnInit,OnDestroy } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DevService } from '../../../service/dev.service';
 import { CommonModule } from '@angular/common';
@@ -10,7 +10,7 @@ import { CardComponent } from '../card/card.component';
 import { FirsebaseService } from '../../../service/firsebase.service';
 @Component({
   selector: 'app-item',
-  imports: [CommonModule, NgIf, CommentComponent,CardComponent],
+  imports: [CommonModule, NgIf, CommentComponent, CardComponent],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css',
 })
@@ -20,8 +20,8 @@ export class ItemComponent implements OnInit, OnDestroy {
   itemId: number | undefined;
   data: Item[] = [];
   item: Item | undefined;
-  imageLoad:boolean = false;
-  private subscription!:Subscription;
+  imageLoad: boolean = false;
+  private subscription!: Subscription;
   private fireService = inject(FirsebaseService);
   constructor() { }
 
@@ -41,10 +41,10 @@ export class ItemComponent implements OnInit, OnDestroy {
   getArticles(): void {
     this.subscription = this.devService.articles().subscribe({
       next: (articles) => {
-        if(articles){
-          this.data = articles; 
-          if(this.data){
-            this.item =  this.data.find((item) => item.id === this.itemId);
+        if (articles) {
+          this.data = articles;
+          if (this.data) {
+            this.item = this.data.find((item) => item.id === this.itemId);
             console.log(this.item)
           }
         }
@@ -52,23 +52,13 @@ export class ItemComponent implements OnInit, OnDestroy {
       error: (err) => console.error('Error fetching articles:', err),
     });
   }
-  
-  oneImageLoad():void
-  {
+
+  oneImageLoad(): void {
     this.imageLoad = true;
   }
 
-  addComment(): void {
-    this.subscription = this.fireService.addComment().subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => console.error('Error adding comment:', err),
-    });
-  }
-
   ngOnDestroy(): void {
-    if(this.subscription){
+    if (this.subscription) {
       this.subscription.unsubscribe();
     }
   }

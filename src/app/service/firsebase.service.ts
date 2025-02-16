@@ -12,12 +12,8 @@ export class FirsebaseService {
 
   constructor() { }
 
-  addComment(): Observable<any> {
-    const addCommentPromise = addDoc(collection(this.fireStore, this.collectioName), {
-      description: "Hard Rock",
-      name: "Metallica",
-      url: "https://www.google.com"
-    });
+  addComment(comment: Comment): Observable<any> {
+    const addCommentPromise = addDoc(collection(this.fireStore, this.collectioName), comment);
 
     return from(addCommentPromise);
   }
