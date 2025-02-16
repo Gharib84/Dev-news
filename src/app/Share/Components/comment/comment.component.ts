@@ -6,9 +6,10 @@ import { Auth, GoogleAuthProvider, signInWithPopup, UserCredential, onAuthStateC
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
+import { CardComponent } from '../card/card.component';
 @Component({
   selector: 'app-comment',
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,CardComponent],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
@@ -50,7 +51,12 @@ export class CommentComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
+    this.auth.onAuthStateChanged((user) => {
+      if (user) {
+        this.signedIn = false;
+        this.userAvatar = user.photoURL || '';
+      }
+    });
   }
 
   ngOnDestroy(): void {
