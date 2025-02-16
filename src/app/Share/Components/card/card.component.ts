@@ -1,8 +1,9 @@
-import { Component, OnInit,OnDestroy,inject } from '@angular/core';
+import { Component, OnInit,OnDestroy,inject,Input } from '@angular/core';
 import { FirsebaseService } from '../../../service/firsebase.service';
 import { Comment } from '../../../core/interfaces/comment';
 import { Subscription } from 'rxjs';
 import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,UserCredential } from '@angular/fire/auth';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-card',
   imports: [],
@@ -17,6 +18,9 @@ export class CardComponent  implements OnInit, OnDestroy {
   blueEffect: boolean = false;
   private auth = inject(Auth);
   private userCredential!: UserCredential;
+  private router = inject(Router);
+  @Input('id') itemId: any;
+
   constructor() { }
   
   ngOnInit(): void {
@@ -35,12 +39,20 @@ export class CardComponent  implements OnInit, OnDestroy {
 
   async loginWithGoogle() {
     const provider = new GoogleAuthProvider();
-    await signInWithPopup(this.auth, provider);
-    const user = await this.userCredential.user;
-
-    console.log('User signed in with Google:', user.displayName);
+    try {
+      const result = await signInWithPopup(this.auth, provider); //Await my result
+      const userCredential = result; //Assign the result to userCredential.
+      const user = userCredential.user; // Access user from userCredential
+  
+      if (user) {
+        this.router.navigate(['/item', this.itemId]);
+        console.log('User signed in with Google:', user.displayName, ' ', user.photoURL);
+      }
+    } catch (error) {
+      console.error("Google sign-in error:", error);
+    }
   }
-
+  
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
