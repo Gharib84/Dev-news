@@ -14,8 +14,9 @@ export class FirsebaseService {
 
   addComment(): Observable<any> {
     const addCommentPromise = addDoc(collection(this.fireStore, this.collectioName), {
-      name: "Hard Rock",
-      description: "Metallica",
+      description: "Hard Rock",
+      name: "Metallica",
+      url: "https://www.google.com"
     });
 
     return from(addCommentPromise);

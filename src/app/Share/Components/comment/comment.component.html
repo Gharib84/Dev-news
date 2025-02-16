@@ -8,5 +8,10 @@
 </div>
 <div class="card bg-base-100 shadow-xl w-3/4 mx-auto lg:mx-0 lg:w-full p-0 lg:py-5 mt-5">
     <textarea class="textarea textarea-warning w-full" placeholder="Write Comment here" cols="100" rows="10"></textarea>
-    <button class="btn btn-outline btn-secondary p-2 mt-5">share</button>
+    @if (!signedIn) {
+        <button class="btn btn-outline btn-secondary p-2 mt-5">share</button>
+    }@else {
+        <button class="btn block btn-warning p-2 mt-5">Warning</button>
+        
+    }
 </div>

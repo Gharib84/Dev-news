@@ -17,7 +17,6 @@ export class CardComponent  implements OnInit, OnDestroy {
   private firsebaseService = inject(FirsebaseService);
   blueEffect: boolean = false;
   private auth = inject(Auth);
-  private userCredential!: UserCredential;
   private router = inject(Router);
   @Input('id') itemId: any;
 
