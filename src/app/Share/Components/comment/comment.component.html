@@ -8,15 +8,12 @@
 </div>
 <div class="card bg-base-100 shadow-xl w-3/4 mx-auto lg:mx-0 lg:w-full p-0 lg:py-5 mt-5">
     <!--generate form with my text area-->
-    <form [formGroup]="commentForm" class="form-control">
+    <form [formGroup]="commentForm" class="form-control" (ngSubmit)="onSubmit()">
         <textarea formControlName="description" class="textarea textarea-warning w-full" placeholder="Write Comment here" cols="100" rows="10"></textarea>
     @if (!signedIn) {
-        <button class="btn btn-outline btn-secondary p-2 mt-5">share</button>
+        <button type="submit" class="btn btn-outline btn-secondary p-2 mt-5">share</button>
     }    
     </form> 
-    @if (signedIn) {
-        <button class="btn block btn-warning p-2 mt-5" (click)="loginWithGoogle()">Sign in</button>
-    }
 </div>
 <div class="container w-full mx-auto">
     <app-card [id]="itemId"></app-card>

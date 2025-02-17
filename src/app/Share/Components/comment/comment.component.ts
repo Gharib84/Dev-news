@@ -28,12 +28,11 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   constructor(private formBuilder: FormBuilder) {
     this.commentForm = this.formBuilder.group({
-      description: ['', [Validators.required]]
+      description: ['', [Validators.required]],
     });
 
-    this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
-    this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
-
+    //add new from control
+    //this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
   }
 
 
@@ -64,6 +63,8 @@ export class CommentComponent implements OnInit, OnDestroy {
         this.userName = user.displayName || '';
       }
     });
+
+    this.onSubmit();
   }
 
   ngOnDestroy(): void {
@@ -72,15 +73,18 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.commentForm.valid) {
-      const comment: Comment = {
-        id: this.itemId,
-        description: this.commentForm.value.comment,
-        name: this.commentForm.value.name,
-        url: this.commentForm.value.url,
-      };
-
-      this.firsebaseService.addComment(comment);
-      this.commentForm.reset();
+      this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
+      this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
+      const comment: Comment = this.commentForm.value;
+      this.firsebaseService.addComment(comment).subscribe({
+        next: (data) => {
+          console.log(data);
+          this.commentForm.reset();
+        },
+        error: (error) => {
+          console.error(error);
+        }
+      });  
     }
   }
 }
