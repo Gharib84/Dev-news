@@ -73,6 +73,7 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.commentForm.valid) {
+      this.commentForm.addControl('id', new FormControl(this.itemId, Validators.required));
       this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
       this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
       const comment: Comment = this.commentForm.value;
