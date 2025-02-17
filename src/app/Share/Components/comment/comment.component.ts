@@ -30,9 +30,6 @@ export class CommentComponent implements OnInit, OnDestroy {
     this.commentForm = this.formBuilder.group({
       description: ['', [Validators.required]],
     });
-
-    //add new from control
-    //this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
   }
 
 

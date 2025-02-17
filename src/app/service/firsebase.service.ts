@@ -37,4 +37,11 @@ export class FirsebaseService {
 
     return from(deleteCommentPromise);
   }
+
+  
+  getComment(id: string): Observable<Comment | undefined> {
+    return this.getComments().pipe(
+      map((comments) => comments.find((comment) => comment.id === id))
+    );
+  }
 }
