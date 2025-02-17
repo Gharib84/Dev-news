@@ -9,26 +9,31 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CardComponent } from '../card/card.component';
 @Component({
   selector: 'app-comment',
-  imports: [ReactiveFormsModule,CardComponent],
+  imports: [ReactiveFormsModule, CardComponent],
   templateUrl: './comment.component.html',
   styleUrl: './comment.component.css'
 })
 export class CommentComponent implements OnInit, OnDestroy {
   private subscription: Subscription = new Subscription();
-  private commentForm!: FormGroup;
+  public commentForm!: FormGroup;
   private firsebaseService = inject(FirsebaseService);
   blueEffect: boolean = false;
   private auth = inject(Auth);
   private router = inject(Router);
   @Input('id') itemId: any;
   signedIn: boolean = true;
-  userAvatar:string = '';
+  userAvatar: string = '';
+  userName: string = '';
 
 
   constructor(private formBuilder: FormBuilder) {
     this.commentForm = this.formBuilder.group({
-      comment: new FormControl('', [Validators.required])
+      description: ['', [Validators.required]]
     });
+
+    this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
+    this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
+
   }
 
 
@@ -43,6 +48,7 @@ export class CommentComponent implements OnInit, OnDestroy {
         this.router.navigate(['/item', this.itemId]);
         this.signedIn = false;
         this.userAvatar = user.photoURL || ''; // Assign user photo URL to userAvatar
+        this.userName = user.displayName || ''; // Assign user display name to userName
         console.log('User signed in with Google:', user.displayName, ' ', user.photoURL);
       }
     } catch (error) {
@@ -55,11 +61,26 @@ export class CommentComponent implements OnInit, OnDestroy {
       if (user) {
         this.signedIn = false;
         this.userAvatar = user.photoURL || '';
+        this.userName = user.displayName || '';
       }
     });
   }
 
   ngOnDestroy(): void {
 
+  }
+
+  onSubmit() {
+    if (this.commentForm.valid) {
+      const comment: Comment = {
+        id: this.itemId,
+        description: this.commentForm.value.comment,
+        name: this.commentForm.value.name,
+        url: this.commentForm.value.url,
+      };
+
+      this.firsebaseService.addComment(comment);
+      this.commentForm.reset();
+    }
   }
 }
