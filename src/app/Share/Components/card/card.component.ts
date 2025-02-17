@@ -19,6 +19,7 @@ export class CardComponent  implements OnInit, OnDestroy {
   private auth = inject(Auth);
   private router = inject(Router);
   @Input('id') itemId: any;
+  commentsByItemId: Comment[] = [];
 
   constructor() { }
   
@@ -34,6 +35,16 @@ export class CardComponent  implements OnInit, OnDestroy {
         }
       })
     );
+
+    this.subscription = this.firsebaseService.getCommentsByItemId(this.itemId).subscribe({
+      next: (comments) => {
+        this.commentsByItemId = comments;
+        console.log(this.commentsByItemId);
+      },
+      error: (error) => {
+        console.error(error + 'Error fetching comments by item id');  
+      }    
+    }) 
   }
 
   async loginWithGoogle() {
