@@ -44,4 +44,11 @@ export class FirsebaseService {
       map((comments) => comments.find((comment) => comment.id === id))
     );
   }
+
+  
+  getCommentsByItemId(itemId: string): Observable<Comment[]> {
+    return this.getComments().pipe(
+      map((comments) => comments.filter((comment) => comment.id === itemId))
+    );
+  }
 }
