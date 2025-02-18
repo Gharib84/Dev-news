@@ -4,9 +4,10 @@ import { Comment } from '../../../core/interfaces/comment';
 import { Subscription } from 'rxjs';
 import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,UserCredential } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { NgClass } from '@angular/common';
 @Component({
   selector: 'app-card',
-  imports: [],
+  imports: [NgClass],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
   providers: [FirsebaseService]
@@ -20,6 +21,8 @@ export class CardComponent  implements OnInit, OnDestroy {
   private router = inject(Router);
   @Input('id') itemId: any;
   commentsByItemId!: Comment[]
+  @Input('isAuthenticated') isAuthenticated: boolean = false;
+
 
   constructor() { }
   
@@ -39,7 +42,8 @@ export class CardComponent  implements OnInit, OnDestroy {
     this.subscription = this.firsebaseService.getCommentsByItemIdRealTime(this.itemId).subscribe({
       next: (comments) => {
         if (comments) {
-          this.commentsByItemId = comments;
+          this.commentsByItemId = comments || [];
+          console.log(this.commentsByItemId);
         }
       },
       error: (error) => {

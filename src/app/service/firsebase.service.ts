@@ -9,6 +9,7 @@ import { Comment } from '../core/interfaces/comment';
 export class FirsebaseService {
   private collectioName: string = "comments";
   private fireStore = inject(Firestore);
+ 
 
   constructor() { }
 
@@ -57,5 +58,4 @@ export class FirsebaseService {
     const commentsQuery = query(collection(this.fireStore, this.collectioName), where('id', '==', itemId));
     return collectionData(commentsQuery, { idField: 'id' }) as Observable<Comment[]>;
   }
- 
 }

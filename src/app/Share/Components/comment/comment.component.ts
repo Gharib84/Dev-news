@@ -2,7 +2,7 @@ import { Component, inject, OnDestroy, OnInit, Input } from '@angular/core';
 import { Comment } from '../../../core/interfaces/comment';
 import { FirsebaseService } from '../../../service/firsebase.service';
 import { Subscription } from 'rxjs';
-import { Auth, GoogleAuthProvider, signInWithPopup, UserCredential, onAuthStateChanged } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, signInWithPopup, getAuth, onAuthStateChanged } from '@angular/fire/auth';
 import { Router } from '@angular/router';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -24,7 +24,8 @@ export class CommentComponent implements OnInit, OnDestroy {
   signedIn: boolean = true;
   userAvatar: string = '';
   userName: string = '';
-
+  isAuthenticated: boolean = false;
+  userAuth = getAuth();
 
   constructor(private formBuilder: FormBuilder) {
     this.commentForm = this.formBuilder.group({
@@ -42,9 +43,10 @@ export class CommentComponent implements OnInit, OnDestroy {
 
       if (user) {
         this.router.navigate(['/item', this.itemId]);
-        this.signedIn = false;
+        this.signedIn = true;
         this.userAvatar = user.photoURL || ''; // Assign user photo URL to userAvatar
         this.userName = user.displayName || ''; // Assign user display name to userName
+        this.isAuthenticated = true;
         console.log('User signed in with Google:', user.displayName, ' ', user.photoURL);
       }
     } catch (error) {
@@ -57,8 +59,7 @@ export class CommentComponent implements OnInit, OnDestroy {
       if (user) {
         this.signedIn = false;
         this.userAvatar = user.photoURL || '';
-        this.userName = user.displayName || '';
-      }
+        this.userName = user.displayName || '';      }
     });
   }
 
@@ -79,7 +80,7 @@ export class CommentComponent implements OnInit, OnDestroy {
       if (!this.commentForm.contains('url')) {
         this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
       }
-      
+
       const comment: Comment = this.commentForm.value;
       this.firsebaseService.addComment(comment).subscribe({
         next: (data) => {
