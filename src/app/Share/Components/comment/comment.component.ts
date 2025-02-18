@@ -60,8 +60,6 @@ export class CommentComponent implements OnInit, OnDestroy {
         this.userName = user.displayName || '';
       }
     });
-
-    this.onSubmit();
   }
 
   ngOnDestroy(): void {
@@ -70,14 +68,24 @@ export class CommentComponent implements OnInit, OnDestroy {
 
   onSubmit() {
     if (this.commentForm.valid) {
-      this.commentForm.addControl('id', new FormControl(this.itemId, Validators.required));
-      this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
-      this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
+      if (!this.commentForm.contains('id')) {
+        this.commentForm.addControl('id', new FormControl(this.itemId, Validators.required));
+      }
+
+      if (!this.commentForm.contains('name')) {
+        this.commentForm.addControl('name', new FormControl(this.userName, Validators.required));
+      }
+
+      if (!this.commentForm.contains('url')) {
+        this.commentForm.addControl('url', new FormControl(this.userAvatar, Validators.required));
+      }
+      
       const comment: Comment = this.commentForm.value;
       this.firsebaseService.addComment(comment).subscribe({
         next: (data) => {
           console.log(data);
-          this.commentForm.reset();
+          this.commentForm.get('description')?.reset(); // Reset only the description control
+          this.router.navigate(['/item', this.itemId]);
         },
         error: (error) => {
           console.error(error);

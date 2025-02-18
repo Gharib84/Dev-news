@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map, switchMap, from } from 'rxjs';
-import { Firestore, addDoc, collection, getDocs, query, deleteDoc, doc} from '@angular/fire/firestore';
+import { Firestore, addDoc, collection, getDocs, query, deleteDoc, doc,collectionData,where} from '@angular/fire/firestore';
 import { Comment } from '../core/interfaces/comment';
 @Injectable({
   providedIn: 'root'
@@ -51,4 +51,11 @@ export class FirsebaseService {
       map((comments) => comments.filter((comment) => comment.id === itemId))
     );
   }
+
+  //get comments by item id runtimes when database updated  
+  getCommentsByItemIdRealTime(itemId: string): Observable<Comment[] | undefined> {
+    const commentsQuery = query(collection(this.fireStore, this.collectioName), where('id', '==', itemId));
+    return collectionData(commentsQuery, { idField: 'id' }) as Observable<Comment[]>;
+  }
+ 
 }
