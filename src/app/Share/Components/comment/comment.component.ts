@@ -24,7 +24,7 @@ export class CommentComponent implements OnInit, OnDestroy {
   signedIn: boolean = false;
   userAvatar: string = '';
   userName: string = '';
-  isAuthenticated!: boolean;
+  isAuthenticated:boolean  = false;
   userAuth = getAuth();
 
   constructor(private formBuilder: FormBuilder) {
@@ -45,6 +45,7 @@ export class CommentComponent implements OnInit, OnDestroy {
         this.signedIn = true;
         this.userAvatar = user.photoURL || ''; // Assign user photo URL to userAvatar
         this.userName = user.displayName || ''; // Assign user display name to userName
+        this.isAuthenticated = true;
         this.router.navigate(['/item', this.itemId]);
 
         if (user.email) {
@@ -61,8 +62,13 @@ export class CommentComponent implements OnInit, OnDestroy {
     this.auth.onAuthStateChanged((user) => {
       if (user) {
         this.signedIn = true;
+        this.isAuthenticated = true;
         this.userAvatar = user.photoURL || '';
-        this.userName = user.displayName || '';      }
+        this.userName = user.displayName || '';      
+      } else {
+        this.signedIn = false;
+        this.isAuthenticated = false;
+      }
     });
   }
 

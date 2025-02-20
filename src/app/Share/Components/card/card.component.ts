@@ -1,18 +1,19 @@
-import { Component, OnInit,OnDestroy,inject,Input } from '@angular/core';
+import { Component, OnInit, OnDestroy, inject, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FirsebaseService } from '../../../service/firsebase.service';
 import { Comment } from '../../../core/interfaces/comment';
 import { Subscription } from 'rxjs';
-import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup,UserCredential } from '@angular/fire/auth';
+import { Auth, GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup, UserCredential } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { NgClass } from '@angular/common';
+import { CommonModule } from '@angular/common';
+
 @Component({
   selector: 'app-card',
-  imports: [NgClass],
+  imports: [CommonModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css',
   providers: [FirsebaseService]
 })
-export class CardComponent  implements OnInit, OnDestroy {
+export class CardComponent implements OnInit, OnDestroy, OnChanges {
   comments: Comment[] = [];
   private subscription: Subscription = new Subscription();
   private firsebaseService = inject(FirsebaseService);
@@ -25,7 +26,7 @@ export class CardComponent  implements OnInit, OnDestroy {
 
 
   constructor() { }
-  
+
   ngOnInit(): void {
     this.subscription.add(
       this.firsebaseService.getComments().subscribe({
@@ -47,9 +48,9 @@ export class CardComponent  implements OnInit, OnDestroy {
         }
       },
       error: (error) => {
-        console.error(error + 'Error fetching comments by item id');  
-      }    
-    }) 
+        console.error(error + 'Error fetching comments by item id');
+      }
+    })
   }
 
   async loginWithGoogle() {
@@ -58,7 +59,7 @@ export class CardComponent  implements OnInit, OnDestroy {
       const result = await signInWithPopup(this.auth, provider); //Await my result
       const userCredential = result; //Assign the result to userCredential.
       const user = userCredential.user; // Access user from userCredential
-  
+
       if (user) {
         this.router.navigate(['/item', this.itemId]);
         console.log('User signed in with Google:', user.displayName, ' ', user.photoURL);
@@ -67,10 +68,19 @@ export class CardComponent  implements OnInit, OnDestroy {
       console.error("Google sign-in error:", error);
     }
   }
-  
+
   ngOnDestroy(): void {
     if (this.subscription) {
       this.subscription.unsubscribe();
     }
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['isAuthenticated']) {
+      console.log('Card isAuthenticated:', this.isAuthenticated);
+    }
+  }
+  trackByCommentId(index: number, comment: Comment): string {
+    return comment.id || index.toString();
   }
 }

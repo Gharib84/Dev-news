@@ -1,18 +1,21 @@
 <div class="card-container h-auto">
   @for ( comment of commentsByItemId ; track comment.id ) {
-  <div
-    class="relative container card bg-[#141517] h-auto w-full mx-auto rounded-md shadow-md flex flex-col md:flex-row justify-between p-14 lg:p-10 md:p-12 items-center  md:h-52 mt-10">
-    <div class="absolute z-10  bg-black bg-opacity-50 rounded-md" [ngClass]="{'backdrop-blur-lg': !isAuthenticated}" ></div>
-    <div class="avatar w-24 h-24 rounded-full mb-4 md:mb-0">
-      <div class="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-2">
-        <img [src]="comment.url" alt="avatar"
-          class="p-1 lg:p-0 w-full h-full object-cover rounded-full aspect-square" />
+  <div>
+    <div
+      class="relative container card bg-[#141517] h-auto w-full mx-auto rounded-md shadow-md flex flex-col md:flex-row justify-between p-14 lg:p-10 md:p-12 items-center md:h-52 mt-10">
+      <div class="absolute z-10 inset-0 bg-black bg-opacity-50 rounded-md"
+        [ngClass]="{'backdrop-blur-lg': !isAuthenticated, 'inset-0': !isAuthenticated}"></div>
+      <div class="avatar w-24 h-24 rounded-full mb-4 md:mb-0">
+        <div class="ring-primary ring-offset-base-100 w-24 h-24 rounded-full ring ring-offset-2">
+          <img [src]="comment.url" alt="avatar"
+            class="p-1 lg:p-0 w-full h-full object-cover rounded-full aspect-square" />
+        </div>
+      </div>
+      <div class="content flex flex-col justify-center items-center lg:items-start md:gx-10 w-full h-full ml-0 md:ml-5">
+        <h6 class="text-pink-500 text-lg lg:text-lg font-bold">{{comment.name}}</h6>
+        <p class="text-sm md:text-base text-center lg:text-left">{{comment.description}}</p>
       </div>
     </div>
-    <div class="content flex flex-col justify-center items-center lg:items-start md:gx-10  w-full h-full ml-0 md:ml-5">
-      <h6 class="text-pink-500 text-lg lg:text-lg font-bold">{{comment.name}}</h6>
-      <p class="text-sm md:text-base text-center lg:text-left">{{comment.description }}</p>
-    </div>
   </div>
-  }
+}
 </div>
