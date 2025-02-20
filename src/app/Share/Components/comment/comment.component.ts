@@ -21,10 +21,10 @@ export class CommentComponent implements OnInit, OnDestroy {
   private auth = inject(Auth);
   private router = inject(Router);
   @Input('id') itemId: any;
-  signedIn: boolean = true;
+  signedIn: boolean = false;
   userAvatar: string = '';
   userName: string = '';
-  isAuthenticated: boolean = false;
+  isAuthenticated!: boolean;
   userAuth = getAuth();
 
   constructor(private formBuilder: FormBuilder) {
@@ -42,11 +42,14 @@ export class CommentComponent implements OnInit, OnDestroy {
       const user = userCredential.user; // Access user from userCredential
 
       if (user) {
-        this.router.navigate(['/item', this.itemId]);
         this.signedIn = true;
         this.userAvatar = user.photoURL || ''; // Assign user photo URL to userAvatar
         this.userName = user.displayName || ''; // Assign user display name to userName
-        this.isAuthenticated = true;
+        this.router.navigate(['/item', this.itemId]);
+
+        if (user.email) {
+          this.isAuthenticated = true
+        }
         console.log('User signed in with Google:', user.displayName, ' ', user.photoURL);
       }
     } catch (error) {
@@ -57,7 +60,7 @@ export class CommentComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.auth.onAuthStateChanged((user) => {
       if (user) {
-        this.signedIn = false;
+        this.signedIn = true;
         this.userAvatar = user.photoURL || '';
         this.userName = user.displayName || '';      }
     });

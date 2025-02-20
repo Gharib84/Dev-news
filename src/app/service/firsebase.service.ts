@@ -58,4 +58,6 @@ export class FirsebaseService {
     const commentsQuery = query(collection(this.fireStore, this.collectioName), where('id', '==', itemId));
     return collectionData(commentsQuery, { idField: 'id' }) as Observable<Comment[]>;
   }
+  //get user uuid from firebase
+  
 }

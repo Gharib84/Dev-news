@@ -21,7 +21,7 @@ export class CardComponent  implements OnInit, OnDestroy {
   private router = inject(Router);
   @Input('id') itemId: any;
   commentsByItemId!: Comment[]
-  @Input('isAuthenticated') isAuthenticated: boolean = false;
+  @Input('isAuthenticated') isAuthenticated!: boolean;
 
 
   constructor() { }

@@ -10,7 +10,7 @@
     <!--generate form with my text area-->
     <form [formGroup]="commentForm" class="form-control" (ngSubmit)="onSubmit()">
         <textarea formControlName="description" class="textarea textarea-warning w-full" placeholder="Write Comment here" cols="100" rows="10"></textarea>
-    @if (!signedIn) {
+    @if (signedIn) {
         <button type="submit" class="btn btn-outline btn-warning p-2 mt-5">share</button>
     } @else {
         <button (click)="loginWithGoogle()" class=" btn btn-warning p-2 mt-5">Sign up</button>
@@ -18,5 +18,5 @@
     </form> 
 </div>
 <div class="container w-full mx-auto">
-    <app-card [id]="itemId" [isAuthenticated]="isAuthenticated"></app-card>
+    <app-card [id]="itemId" [isAuthenticated]="!isAuthenticated"></app-card>
 </div>
