@@ -79,11 +79,3 @@ This project is licensed under the MIT License.
 ## Acknowledgements
 
 Thanks to the Dev.to team for providing the API, and to the Angular and Firebase communities for their excellent documentation and support.
-
-- **Project Name**: Feel free to replace "Dev.to Article Explorer" with your preferred project name.
-- **Username**: Replace `yourusername` in the clone command with your actual GitHub username or organization.
-- **Angular Version**: This README assumes Angular 13. Update it to match your project's version if different.
-- **Firebase Purpose**: Firebase is assumed to be used for authentication. Adjust this if it serves another purpose (e.g., Firestore for data storage).
-- **Styling**: Tailwind CSS is included as an assumption. Replace it with your actual styling framework or library if different.
-
-This README provides a clear overview of your project, including setup instructions and key details, making it easy for others to understand and use your application. Let me know if you'd like any adjustments!
