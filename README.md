@@ -10,7 +10,7 @@ Dev.to Article Explorer is a lightweight Angular application that allows users t
 
 ## Technologies Used
 
-- Angular (version 13)
+- Angular (version 19)
 - Dev.to API
 - Firebase (for authentication and database)
 - Tailwind CSS (for styling)
