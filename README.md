@@ -23,7 +23,7 @@ Dev.to Article Explorer is a lightweight Angular application that allows users t
    ```
 2. **Navigate to the project directory**:
    ```bash
-   cd project-Directory
+   cd Dev-news 
    ```
 3. **Install dependencies**:
    ```bash
