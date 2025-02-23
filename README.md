@@ -43,7 +43,7 @@ Dev.to Article Explorer is a lightweight Angular application that allows users t
 - Open your browser and navigate to `http://localhost:4200`.
 - **Build for production**:
    ```bash
-   ng build --prod
+   ng build 
    ```
 
 ## Configuration
